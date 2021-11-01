@@ -1,0 +1,1 @@
+web: gunicorn socialDex.wsgi --log-file -
