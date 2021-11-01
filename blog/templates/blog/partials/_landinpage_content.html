@@ -1,0 +1,21 @@
+ <div class="container">
+      {% block banner %}
+      {% include "blog/partials/_banner_big.html"%}
+      {% endblock %}
+
+     
+
+    <main role="main" class="container">
+      <div class="row g-5">
+        {% block section_articles%}
+        {% include "blog/partials/_section_articles.html"%}
+        {% endblock %}
+
+        {% block sidebar%}
+        {% include "blog/partials/_sidebar.html"%}
+        {% endblock %}
+
+      </div>
+    </main>
+
+</div>

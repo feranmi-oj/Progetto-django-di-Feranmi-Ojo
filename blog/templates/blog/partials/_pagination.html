@@ -1,0 +1,22 @@
+<nav class="blog-pagination" aria-label="Pagination">
+
+        {% if page.has_previous %}
+            <a class="btn btn-outline-danger" href="?page=1">&laquo; first</a>
+            <a class="btn btn-outline-danger" href="?page={{ page.previous_page_number }}">previous</a>
+        {% else%}
+            <a class="btn btn-outline-secondary disabled">first</a>
+            <a class="btn btn-outline-secondary disabled">previous</a>
+        {% endif %}
+
+
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+
+        {% if page.has_next %}
+            <a class="btn btn-outline-danger"  href="?page={{ page.next_page_number }}">next</a>
+            <a class="btn btn-outline-danger"  href="?page={{ page.paginator.num_pages }}">last &raquo;</a>
+        {% else%}
+            <a class="btn btn-outline-secondary disabled">next</a>
+            <a class="btn btn-outline-secondary disabled">last</a>
+        {% endif %}
+
+</nav>

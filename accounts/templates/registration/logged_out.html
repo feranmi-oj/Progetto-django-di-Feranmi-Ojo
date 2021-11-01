@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+
+{% block page_content %}
+<div class="container-fluid p-5 ">
+  <h2>Logout</h2>
+  <br>
+  <p>Grazie per aver perso del tempo di qualità in questo sito oggi</p>
+  <p>Speriamo di rivederci presto</p>
+  <a href="{% url 'accounts:login '%}"> Vuoi rifare il login? </a>
+</div>
+{% endblock %}

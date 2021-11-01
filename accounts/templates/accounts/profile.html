@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+
+{% block page_content%}
+
+  <div class="container fluid">
+      <h5>Info Profile:</h5>
+      <div class="card vertical" style="background-color: #F5F5DC;">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <ul>
+                            <li>Name: {{user_profile.user.username}}</li>
+                            <li>Firstname: {{user_profile.user.first_name}}</li>
+                            <li>Lastname: {{user_profile.user.last_name}}</li>
+                            <li>Mail: {{user_profile.user.email}}</li>
+                            <li>birthday: {{user_profile.user.profile.birthday}}</li>
+
+
+                        </ul>
+                        <br>
+                        {% if user.username == user_profile.user.username %}
+                        <p>You can edit your profile  <a href="{% url 'accounts:edit'%}">here</a> </p>
+                        <p> You can change your password  <a href="{% url 'accounts:password_change'%}">here</a> </p>
+                        {% endif %}
+                    </div>
+                </div>
+      </div>
+
+
+  </div>
+
+   <a class="btn btn-outline-secondary" href="{%url 'blog:blog'%}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+   </a>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "blog/base.html" %}
+
+{% block page_content%}
+ <style>
+            input[type=button], input[type=submit], input[type=reset]  {
+              background-color: #000000;
+              border: none;
+              color: beige;
+              padding: 15px 80px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              text-transform: uppercase;
+              font-size: 13px;
+              -webkit-box-shadow: 0 10px 30px 0 rgb(245, 245, 220);
+              box-shadow: 0 10px 30px 0 rgb(245, 245, 220);
+              -webkit-border-radius: 5px 5px 5px 5px;
+              border-radius: 5px 5px 5px 5px;
+              margin: 5px 20px 40px 20px;
+              -webkit-transition: all 0.3s ease-in-out;
+              -moz-transition: all 0.3s ease-in-out;
+              -ms-transition: all 0.3s ease-in-out;
+              -o-transition: all 0.3s ease-in-out;
+              transition: all 0.3s ease-in-out;
+            }
+
+            input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+              background-color: #000000;
+            }
+
+            input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+              -moz-transform: scale(0.95);
+              -webkit-transform: scale(0.95);
+              -o-transform: scale(0.95);
+              -ms-transform: scale(0.95);
+              transform: scale(0.95);
+            }
+
+        </style>
+<div class="container fluid p-5">
+    <div class="card vertical" style="background-color: #F5F5DC;">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h5>Cambia la tua password:</h5>
+                        <br>
+                        <form method="post">
+                            {% csrf_token%}
+                            {{ form.as_p }}
+                            <a class="btn btn-outline-secondary" href="{%url 'accounts:profile' user.profile.id %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                            </a>
+                            <input type="submit" value="Change Password">
+                        </form>
+
+                    </div>
+                </div>
+    </div>
+</div>
+
+{% endblock %}

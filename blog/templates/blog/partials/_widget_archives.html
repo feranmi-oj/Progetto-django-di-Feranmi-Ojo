@@ -1,0 +1,9 @@
+<div class="p-4">
+              <h4 class="fst-italic">Categories</h4>
+               <ol class="list-unstyled mb-0">
+                  {% for category_tag , category_display_name in categories %}
+                    <li><a class="p-2 link-primary" href="{%url 'articles:article-list' category_tag %}" style="color:#A52A2A">{{category_display_name}}</a></li>
+                  {%endfor%}
+               </ol>
+
+</div>

@@ -1,0 +1,14 @@
+ <div class="position-sticky " style="top: 2rem;">
+            <div class="p-4 mb-3 text-dark "style="background-color: #F5F5DC;">
+              <h4 class="fst-italic">About</h4>
+              <p class="mb-0">
+                  Would you like to see how many times a word is repeated in all published posts?
+                  <br>
+              </p>
+                <br>
+                <form action="{% url 'articles:search' %}"  method="GET" class="mb-5">
+                    <input name="q"  type="search" placeholder="Search..." aria-label="Search">
+                    <input  type="submit" value="Search"/>
+                </form>
+            </div>
+ </div>

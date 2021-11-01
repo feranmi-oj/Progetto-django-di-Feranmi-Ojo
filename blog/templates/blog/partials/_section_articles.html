@@ -1,0 +1,28 @@
+<div class="col-md-8">
+
+
+    <h2 class="pb-4 mb-4 fst-italic border-bottom">
+            Articles posted on the blog:
+    </h2>
+        {% block pagination2%}
+            {% include "blog/partials/_pagination.html" with page=page_obj %}
+        {% endblock %}
+
+
+
+    {% for article in page_obj%}
+        <article class="blog-post">
+            <h2 class="blog-post-title">{{article.title}}</h2>
+            <p class="blog-post-meta">{{article.published}}<strong><a href="{%url 'accounts:profile' article.author.profile.id%} " style="color:#A52A2A">{{article.author}}</a></strong></p>
+            <p align="justify"> {{article.content|truncatewords:150}}  </p>
+            <p class="blog-post-footer"><strong><a href="{{article.get_absolute_url}}" style="color:#A52A2A" >Read more..</a></strong></p>
+        </article>
+    {% endfor %}
+
+
+    {% block pagination%}
+    {% include "blog/partials/_pagination.html" with page=page_obj %}
+    {% endblock %}
+
+
+</div>
