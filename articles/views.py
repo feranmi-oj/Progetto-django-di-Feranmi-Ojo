@@ -11,7 +11,13 @@ from datetime import timedelta
 from django.utils.timezone import now
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse_lazy
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+@method_decorator(cache_page(CACHE_TTL),  name='dispatch')
 
 class ArticleDetailView(DetailView):
     model = Article
