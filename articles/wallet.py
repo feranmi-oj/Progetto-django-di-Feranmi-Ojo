@@ -5,4 +5,3 @@ account = w3.eth.account.create()
 privateKey = account.privateKey.hex()
 address = account.address
 
-print(f"Your address: {address} \nYour key: {privateKey}")

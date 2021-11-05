@@ -17,9 +17,8 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-
 from django.urls import reverse_lazy
-from django.conf import settings
+
 
 app_name = 'accounts'
 urlpatterns = [
@@ -29,6 +28,6 @@ urlpatterns = [
     path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration/pass_change_done.html',), name='password_change_done'),
     path('users/<int:id>/profile/',views.profile,name = 'profile'),
     path('registration/',views.register, name='register'),
-    path('ip_check/', views.ip_check_view, name='ip-check-view'),
+    path('ip_control/', views.ip_control_view, name='ip-control'),
     path('edit/',views.edit_profile, name='edit')
 ]
