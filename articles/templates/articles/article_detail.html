@@ -12,7 +12,7 @@
         <br>
         {% if user == article.author%}
         <table>
-            <td><h1>{{ object.title }}</h1></td>
+            <td><h1>{{ article.title }}</h1></td>
             <td><aside class="actions">
             <a class="btn btn-default" href="{%url 'articles:article-edit' object.slug%}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -23,7 +23,7 @@
 
         </table>
         {%endif%}
-        <i><strong>CATEGORY: {{object.category}} </strong></i>
+        <i><strong>CATEGORY: {{article.category}} </strong></i>
         {% if object.img %}
         <div class="text-center">
         <img src="{{object.img.url}}" style="width: 500px" class="wp-caption aligncenter" alt="..." >
@@ -31,15 +31,17 @@
         {%endif%}
         <br>
         <br>
-        <p align="justify">{{ object.content }}</p>
-        <p>Author: {{ object.author }}</p>
-        <p>Published: {{ object.published|date }}</p>
-        <p>ID: <a href="">{{ object.id }}</a></p>
+        <p align="justify">{{ article.content }}</p>
+        <p>Author: {{ article.author }}</p>
+        <p>Published: {{ article.published|date }}</p>
+        <p>ID: <a href="">{{ article.id }}</a></p>
         <br>
-        <a class="btn btn-outline-secondary" href="{%url 'blog:blog'%}">
+
+        <a class="btn btn-outline-secondary" onClick="javascript:history.go(-1);">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
             </svg>
         </a>
+        <a class="btn btn-outline-secondary"href="{%url 'blog:blog'%}"> Back Home</a>
     </div>
 {% endblock %}

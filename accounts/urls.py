@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import ShowProfilePageView
+
 from django.urls import reverse_lazy
 from django.conf import settings
 

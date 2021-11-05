@@ -15,6 +15,8 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+import hashlib
+from .utils import sendTransaction
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 @method_decorator(cache_page(CACHE_TTL),  name='dispatch')
@@ -27,34 +29,6 @@ class ArticleDetailView(DetailView):
 
         return context
 
-# function to get ip address
-def getIp(request):
-    try:
-        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forward:
-            ip = x_forward.split(",")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR")
-    except:
-        ip = ""
-    return ip
-    # Logging system: compare ips if user is authenticated (redirect page when a user registers or logins)
-
-def last_ip(request):
-    if request.user.is_authenticated:
-        if not request.user.is_superuser:
-            lastIp = request.user.userprofile.ipAddress
-        else:
-            lastIp = ""
-        currentIp = getIp(request)
-
-        if currentIp == lastIp:
-            ipStat = "Safe IP"
-        else:
-            ipStat = "Warning: Different IP than usual"
-    else:
-        ipStat = getIp(request)
-    return {'ipStat':ipStat}
 
 
 class ArticleListView(ListView):
@@ -73,7 +47,6 @@ class ArticleListView(ListView):
         context['categories'] = Article.CATEGORIES
         tag = self.kwargs.get('category_tag', None)
         context['tag'] = tag
-        context['last_ip']= last_ip(self.request)
         return context
 
 
@@ -88,6 +61,7 @@ def article_new(request):
                 post = form.save(commit=False)
                 post.author = request.user
                 post.published = timezone.now()
+                post.writeOnChain()
                 post.save()
                 return redirect(f'/articles/{post.slug}/',messages.success(request,"The post was successfully published "))
             else:

@@ -15,8 +15,6 @@
     <br>
     <table class="table  table-bordered" style="background-color: #F5F5DC;" border = "1" cellpadding="5" cellspacing="5">
         <th scope="col">User</th>
-        <th scope="col">firstname</th>
-        <th scope="col">lastname</th>
         <th scope="col">email</th>
         <th scope="col">ip address</th>
         <th scope="col">published articles</th>
@@ -24,8 +22,6 @@
        {% for user in users %}
          <tr>
              <td>{{ user }}</td>
-             <td>{{user.first_name}}</td>
-             <td>{{user.last_name}}</td>
              <td>{{user.email}}</td>
              <td>{{user.profile.ip_address}}</td>
              <td>{{ user.post_count }}</td>

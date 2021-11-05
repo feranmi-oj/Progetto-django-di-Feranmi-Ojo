@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from.utils import sendTransaction
 import hashlib
+from . import wallet
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -18,12 +19,14 @@ class Article(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES,default=PUBLISHED)
 
     TECNOLOGY = 'TC'
+    BLOCKCHAIN='BC'
     SPORT = 'SP'
     GENERAL_CULTURE = 'GC'
     ANIME ='AN'
     FREE_TIME = 'FT'
     CATEGORIES = [
          (TECNOLOGY,'Technology'),
+        (BLOCKCHAIN,'Blockchain'),
          ( SPORT,'Sport'),
         (GENERAL_CULTURE,'General culture'),
         (ANIME ,'Anime'),
@@ -38,13 +41,16 @@ class Article(models.Model):
     created= models.DateTimeField(default=timezone.now)
     published=models.DateTimeField(default=timezone.now)
     updated=models.DateTimeField(auto_now=True)
-    hash = models.CharField(max_length=32, default=None, null=True , blank=True)
-    txId = models.CharField(max_length=66, default=None, null=True, blank=True)
+    address = models.CharField(max_length=66, default=None, null=True)
+    hash = models.CharField(max_length=32, default=None, null=True)
+    txId = models.CharField(max_length=66, default=None, null=True)
 
     def writeOnChain(self):
+        self.address = wallet.address
         self.hash = hashlib.sha256(self.content.encode('utf-8')).hexdigest()
         self.txId = sendTransaction(self.hash)
         self.save()
+
 
     class Meta:
         ordering = ("-updated","-published")

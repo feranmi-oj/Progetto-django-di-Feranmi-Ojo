@@ -2,8 +2,11 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm,UserEditForm,ProfileEditForm,LoginForm
 from django.contrib.auth import login,authenticate
+from django.db.models import Count
 from django.contrib import messages
 from .models import Profile
+from articles.models import Article
+from django.contrib.auth.models import User
 from django.views.generic import DetailView
 # Create your views here.
 
@@ -71,22 +74,16 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request,'registration/registration.html',{'form':form})
+def num_post(request):
+    num_post = Article.objects.filter(author=request.user)
+    return render(request, 'some_template.html', {'num_post': num_post})
 
 def profile(request,id):
     user_profile = get_object_or_404(Profile, id=id)
-    return render(request, 'accounts/profile.html', {'user_profile': user_profile})
+    num_post = Article.objects.filter(author=request.user)
+    return render(request, 'accounts/profile.html', {'user_profile': user_profile,'num_post':num_post})
 
 
-class ShowProfilePageView(DetailView):
-    model= Profile
-    template_name = 'accounts/profile.html'
-
-    def get_context_data(self, *args,**kwargs):
-        users = Profile.objects.all()
-        context = super(ShowProfilePageView,self).get_context_data(*args,**kwargs)
-        page_user= get_object_or_404(Profile, id=self.kwargs['pk'])
-        context['page_user'] = page_user
-        return context
 
 @login_required
 def edit_profile(request):

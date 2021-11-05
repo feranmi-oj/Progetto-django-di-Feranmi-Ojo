@@ -1,19 +1,10 @@
 from django.shortcuts import render,redirect
 from django.views.generic.base import  TemplateView
 from django.core.paginator import Paginator
-
-
 from articles.models import Article
-from .models import Blogpage
 
 
 
-def index(request):
-
-    obj_ls = Blogpage.objects.all()
-    context = {}
-    context['message'] = obj_ls[0].message
-    return render(request,'blog/base.html', context=context)
 
 
 
