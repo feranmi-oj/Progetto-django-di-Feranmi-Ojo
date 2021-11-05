@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,redirect
 from django.views.generic import DetailView, ListView, UpdateView,DeleteView
 from .forms import ArticleEditForm
 from .models import Article
@@ -9,14 +9,13 @@ from django.db.models import Count
 from django.contrib.auth.models import User
 from datetime import timedelta
 from django.utils.timezone import now
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-import hashlib
-from .utils import sendTransaction
+
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 @method_decorator(cache_page(CACHE_TTL),  name='dispatch')

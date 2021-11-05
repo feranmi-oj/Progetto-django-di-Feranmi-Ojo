@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 from.utils import sendTransaction
 import hashlib
 from . import wallet
-from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Article(models.Model):

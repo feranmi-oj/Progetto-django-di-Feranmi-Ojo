@@ -2,18 +2,16 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm,UserEditForm,ProfileEditForm,LoginForm
 from django.contrib.auth import login,authenticate
-from django.db.models import Count
 from django.contrib import messages
 from .models import Profile
 from articles.models import Article
-from django.contrib.auth.models import User
-from django.views.generic import DetailView
+
 # Create your views here.
 
 @login_required()
-def ip_check_view(request):
+def ip_control_view(request):
     context = {}
-    return render(request, 'registration/ipcheck_view.html', context)
+    return render(request, 'registration/ip_control.html', context)
 
 def getIpAdd(request):
     try:
@@ -47,7 +45,7 @@ def login_view(request):
             if ip_address != user_info.ip_address:
                 user_info.ip_address = ip_address
                 user_info.save()
-                return redirect(f"/ip_check/?next={next}")
+                return redirect(f"/ip_control/?next={next}")
 
             else:
                 return redirect('blog/')
